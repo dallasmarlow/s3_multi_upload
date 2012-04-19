@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+$:.unshift File.join File.dirname(__FILE__), *%w[.. lib]
+%w[yaml thor s3_multi_upload].each {|l| require l}
+
+module S3_Multi_Upload
+  class Task < Thor
+
+    desc 'upload', 'upload a file to s3 in parallel'
+    method_option :access_key_id,     :required => true
+    method_option :secret_access_key, :required => true
+    method_option :bucket,            :required => true
+    method_option :file,              :required => true
+    method_option :threads,           :type => :numeric
+    method_option :chunk_size,        :type => :numeric
+    method_option :key
+
+    def upload
+      Upload.new(options, options[:bucket], options[:file]).process
+    end
+
+    default_task :upload
+  end
+end
+
+S3_Multi_Upload::Task.start
