@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.executables   = ['s3_multi_upload']
   s.default_executable = 's3_multi_upload'
 
-  %w[aws-sdk thor progress_bar].each do |gem|
+  %w[aws-sdk thor progressbar].each do |gem|
     s.add_dependency gem
   end
 end

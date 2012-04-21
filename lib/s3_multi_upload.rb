@@ -1,6 +1,6 @@
 require 'pathname'
 require 'aws-sdk'
-require 'progress_bar'
+require 'progressbar'
 
 module S3_Multi_Upload
   class Upload
@@ -61,7 +61,7 @@ module S3_Multi_Upload
                 upload.add_part :data        => file.read(chunk_size, offset),
                                 :part_number => index
 
-                progress.increment! if options[:progress_bar]
+                progress.inc if options[:progress_bar]
               end
             end
           end
@@ -72,7 +72,7 @@ module S3_Multi_Upload
     end
 
     def progress
-      @progress ||= ProgressBar.new queue.size, :bar, :percentage, :eta
+      @progress ||= ProgressBar.new :upload, queue.size
     end
 
     def process
@@ -80,6 +80,7 @@ module S3_Multi_Upload
       puts "uploading #{file} to s3://#{options[:bucket]}/#{object.key} using #{options[:threads]} threads in chunks of #{value} #{unit}"
       progress if options[:progress_bar]
       abort 'upload failed' unless upload
+      progress.finish
     end
 
   end
