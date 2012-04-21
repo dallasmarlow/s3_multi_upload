@@ -10,12 +10,13 @@ module S3_Multi_Upload
     method_option :secret_access_key, :required => true
     method_option :bucket,            :required => true
     method_option :file,              :required => true
-    method_option :threads,           :type => :numeric
-    method_option :chunk_size,        :type => :numeric
+    method_option :threads,           :required => true, :type => :numeric, :default => 5
+    method_option :chunk_size,        :required => true, :type => :hash,    :default => {1 => :mb}
+    method_option :progress_bar,      :type => :boolean, :default => true
     method_option :key
 
     def upload
-      Upload.new(options, options[:bucket], options[:file]).process
+      Upload.new(options).process
     end
 
     default_task :upload
