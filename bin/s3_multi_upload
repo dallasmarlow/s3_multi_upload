@@ -11,7 +11,7 @@ module S3_Multi_Upload
     method_option :bucket,            :required => true
     method_option :file,              :required => true
     method_option :threads,           :required => true, :type => :numeric, :default => 5
-    method_option :chunk_size,        :required => true, :type => :hash,    :default => {1 => :mb}
+    method_option :chunk_size,        :required => true, :type => :hash,    :default => {10 => :mb}
     method_option :progress_bar,      :type => :boolean, :default => true
     method_option :key
 
