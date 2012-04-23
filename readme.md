@@ -2,11 +2,11 @@
 ```bash
 root@ip-10-108-242-120:~# s3_multi_upload --access-key-id xxx      \
                                           --secret-access-key xxx  \ 
-  					  --bucket s3_multi_upload \ 
-					  --chunk-size 25:mb        \
-					  --threads 40             \
-					  --key uploads/u.iso      \
-					  --file ubuntu-12.04-beta2-dvd-amd64.iso
+        									  --bucket s3_multi_upload \ 
+										  --chunk-size 25:mb        \
+										  --threads 40             \
+										  --key uploads/u.iso      \
+										  --file ubuntu-12.04-beta2-dvd-amd64.iso
 
 uploading ubuntu-12.04-beta2-dvd-amd64.iso to s3://s3_multi_upload/uploads/u.iso using 40 threads in chunks of 20 mb
 upload:         20% |oooooooooooooooooooooo                                                         | ETA:   0:01:36
