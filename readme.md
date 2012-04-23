@@ -1,18 +1,18 @@
-parallelized multipart s3 uploads
+## parallelized multipart s3 uploads
 
 ### installation
-gem i s3_multi_upload
+```
+gem install s3_multi_upload
+```
 
 ### usage
 
 ```
-dallas$ s3_multi_upload help upload
-
 Usage:
-  s3_multi_upload upload --access-key-id=ACCESS_KEY_ID         \
-                         --secret-access-key=SECRET_ACCESS_KEY \
-                         --bucket=BUCKET                       \ 
-                         --file=FILE                           
+  s3_multi_upload  --access-key-id=ACCESS_KEY_ID         \
+                   --secret-access-key=SECRET_ACCESS_KEY \
+                   --bucket=BUCKET                       \ 
+                   --file=FILE                           
 
 
 Options:
