@@ -2,7 +2,7 @@
 ```bash
 root@ip-10-108-242-120:~# s3_multi_upload --access-key-id xxx      \
                                           --secret-access-key xxx  \ 
-        									  --bucket s3_multi_upload \ 
+        								--bucket s3_multi_upload \ 
 										  --chunk-size 25:mb        \
 										  --threads 40             \
 										  --key uploads/u.iso      \
