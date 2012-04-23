@@ -80,7 +80,7 @@ module S3_Multi_Upload
       puts "uploading #{file} to s3://#{options[:bucket]}/#{object.key} using #{options[:threads]} threads in chunks of #{value} #{unit}"
       progress if options[:progress_bar]
       abort 'upload failed' unless upload
-      progress.finish
+      progress.finish if options[:progress_bar]
     end
 
   end
