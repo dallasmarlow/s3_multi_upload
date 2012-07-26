@@ -22,7 +22,7 @@ module S3_Multi_Upload
     end
 
     def normalize value, unit = nil
-      case unit.to_sym.downcase
+      case unit.downcase.to_sym
       when nil, :b, :byte, :bytes
         value.to_f
       when :k, :kb, :kilobyte, :kilobytes
@@ -32,7 +32,7 @@ module S3_Multi_Upload
       when :g, :gb, :gigabyte, :gigabytes
         value.to_f * 1024 ** 3
       end
-    end 
+    end
 
     def chunk_size
       normalize *options[:chunk_size].first
@@ -56,7 +56,7 @@ module S3_Multi_Upload
           threads << Thread.new do
             until queue.empty?
               offset, index = queue.deq :asynchronously rescue nil
-              
+
               unless offset.nil?
                 upload.add_part :data        => file.read(chunk_size, offset),
                                 :part_number => index
@@ -72,7 +72,7 @@ module S3_Multi_Upload
     end
 
     def progress
-      @progress ||= ProgressBar.new :upload, queue.size
+      @progress ||= ProgressBar.new "upload", queue.size
     end
 
     def process

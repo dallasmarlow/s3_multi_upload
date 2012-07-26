@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 $:.unshift File.join File.dirname(__FILE__), *%w[.. lib]
-%w[thor s3_multi_upload].each {|l| require l}
+%w[rubygems thor s3_multi_upload].each {|l| require l}
 
 module S3_Multi_Upload
   class Task < Thor
