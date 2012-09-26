@@ -1,6 +1,7 @@
 require 'pathname'
 require 'aws-sdk'
 require 'progressbar'
+require 'base64'
 
 module S3_Multi_Upload
   class Upload
@@ -58,8 +59,13 @@ module S3_Multi_Upload
               offset, index = queue.deq :asynchronously rescue nil
 
               unless offset.nil?
-                upload.add_part :data        => file.read(chunk_size, offset),
-                                :part_number => index
+                data = file.read(chunk_size, offset)
+                digest = Digest::MD5.digest(data)
+                encoded_digest = Base64.encode64(digest).strip
+
+                result = upload.add_part :data => data,
+                                :part_number => index,
+                                :content_md5 => encoded_digest
 
                 progress.inc if options[:progress_bar]
               end
