@@ -5,7 +5,7 @@ require 'base64'
 
 module S3_Multi_Upload
   class Upload
-    attr_accessor :options, :file, :s3, :bucket, :object, :progress
+    attr_accessor :options, :file, :queue, :s3, :bucket, :object, :progress
 
     def initialize options
 
@@ -14,6 +14,7 @@ module S3_Multi_Upload
 
       @options = options
       @file    = Pathname.new options[:file]
+      @queue   = Queue.new
 
       @s3      = AWS::S3.new
       @bucket  = @s3.buckets.create options[:bucket]
@@ -37,10 +38,6 @@ module S3_Multi_Upload
 
     def chunk_size
       normalize *options[:chunk_size].first
-    end
-
-    def queue
-      @queue ||= Queue.new
     end
 
     def enqueue
