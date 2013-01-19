@@ -51,10 +51,8 @@ module S3_Multi_Upload
 
     def upload
       object.multipart_upload do |upload|
-        threads = []
-
-        options[:threads].times do
-          threads << Thread.new do
+        options[:threads].times.collect do
+          Thread.new do
             until queue.empty?
               offset, index = queue.deq :asynchronously rescue nil
 
@@ -71,9 +69,7 @@ module S3_Multi_Upload
               end
             end
           end
-        end
-
-        threads.each &:join
+        end.each(&:join)
       end
     end
 
