@@ -54,14 +54,19 @@ module S3_Multi_Upload
               offset, index = queue.deq :asynchronously rescue nil
 
               unless offset.nil?
-                data = file.read(chunk_size, offset)
-                digest = Digest::MD5.digest(data)
-                encoded_digest = Base64.encode64(digest).strip
+                upload_parameters = {
+                  :data        => file.read(chunk_size, offset),
+                  :part_number => index,
+                }
 
-                result = upload.add_part :data => data,
-                                :part_number => index,
-                                :content_md5 => encoded_digest
+                if options[:checksum]
+                  digest         = Digest::MD5.digest(upload_parameters[:data])
+                  encoded_digest = Base64.encode64(digest).strip
 
+                  upload_parameters[:content_md5] = encoded_digest
+                end
+
+                upload.add_part upload_parameters
                 progress.inc if options[:progress_bar]
               end
             end
