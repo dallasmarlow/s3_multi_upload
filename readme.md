@@ -43,6 +43,9 @@ Options:
   [--progress-bar]                       
                                          # Default: true
 
+  [--checksum]                           
+                                         # Default: true
+
   [--key=KEY]                            # s3 object key (default: file name)
 ```
 
