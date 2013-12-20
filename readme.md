@@ -40,6 +40,9 @@ Options:
   --chunk-size=amount:unit                 
                                          # Default: {10=>:mb}
 
+  [--create-bucket]                       
+                                         # Default: false
+
   [--progress-bar]                       
                                          # Default: true
 

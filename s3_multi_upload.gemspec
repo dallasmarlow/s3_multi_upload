@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 's3_multi_upload'
-  gem.version  = '0.0.4'
+  gem.version  = '0.0.5'
   gem.authors  = ['dallas marlow', 'michael pilat']
   gem.email    = ['dallasmarlow@gmail.com', 'mike@mikepilat.com']
   gem.summary  = 's3 multipart uploads in parallel'

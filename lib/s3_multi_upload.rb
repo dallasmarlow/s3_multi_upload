@@ -18,7 +18,13 @@ module S3_Multi_Upload
       @mutex   = Mutex.new
 
       @s3      = AWS::S3.new
-      @bucket  = @s3.buckets.create options[:bucket]
+      @bucket  = case options[:create_bucket]
+      when true
+        @s3.buckets.create options[:bucket]
+      else
+        @s3.buckets[options[:bucket]]
+      end
+
       @object  = @bucket.objects[options[:key] || @file.basename]
 
       enqueue
