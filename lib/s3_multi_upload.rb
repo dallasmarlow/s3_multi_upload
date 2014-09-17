@@ -8,7 +8,6 @@ module S3_Multi_Upload
     attr_accessor :options, :file, :queue, :mutex, :s3, :bucket, :object, :progress
 
     def initialize options
-
       AWS.config :access_key_id     => options[:access_key_id],
                  :secret_access_key => options[:secret_access_key]
 
@@ -30,16 +29,16 @@ module S3_Multi_Upload
       enqueue
     end
 
-    def normalize value, unit = nil
+    def normalize value, unit = :b
       case unit.downcase.to_sym
-      when nil, :b, :byte, :bytes
+      when :b, :byte, :bytes
         value.to_f
       when :k, :kb, :kilobyte, :kilobytes
-        value.to_f * 1024
+        value.to_f * (2 ** 10)
       when :m, :mb, :megabyte, :megabytes
-        value.to_f * 1024 ** 2
+        value.to_f * (2 ** 20)
       when :g, :gb, :gigabyte, :gigabytes
-        value.to_f * 1024 ** 3
+        value.to_f * (3 ** 30)
       end
     end
 
@@ -55,7 +54,7 @@ module S3_Multi_Upload
 
     def upload
       object.multipart_upload do |upload|
-        options[:threads].times.collect do
+        options[:threads].times.map do
           Thread.new do
             until queue.empty?
               offset, index = queue.deq :asynchronously rescue nil
