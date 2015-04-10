@@ -1,5 +1,5 @@
 require 'pathname'
-require 'aws-sdk'
+require 'aws-sdk-v1'
 require 'progressbar'
 require 'base64'
 

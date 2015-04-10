@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.executables   = ['s3_multi_upload']
   gem.default_executable = 's3_multi_upload'
 
-  gem.add_dependency 'aws-sdk'
+  gem.add_dependency 'aws-sdk-v1'
   gem.add_dependency 'thor'
   gem.add_dependency 'progressbar'
 end
