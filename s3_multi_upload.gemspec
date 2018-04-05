@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 's3_multi_upload'
-  gem.version  = '0.0.6'
+  gem.version  = '0.0.7'
   gem.authors  = ['dallas marlow', 'michael pilat']
   gem.email    = ['dallasmarlow@gmail.com', 'mike@mikepilat.com']
   gem.summary  = 's3 multipart uploads in parallel'
@@ -17,5 +17,5 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'aws-sdk-v1'
   gem.add_dependency 'thor'
-  gem.add_dependency 'progressbar'
+  gem.add_dependency 'progressbar', ['= 0.21.0']
 end
