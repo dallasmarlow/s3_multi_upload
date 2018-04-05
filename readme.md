@@ -18,6 +18,11 @@ upload:         20% |oooooooooooooooooooooo                                     
 gem install s3_multi_upload
 ```
 
+### docker
+```
+docker pull dallasmarlow/s3_multi_upload
+```
+
 ### usage
 
 ```
@@ -62,4 +67,11 @@ s3_multi_upload --access-key-id xxx     \
                 --no-progress-bar       \ # disable the progress bar
                 --chunk-size 50:mb      \ # increase the chunk size
                 --threads 40              # increase the number of threads
+
+docker run -it --rm -v /tmp/upload:/root \
+               dallasmarlow/s3_multi_upload \
+               --access-key-id xxx \
+               --secret-access-key xxx \
+               --bucket xxx \
+               --file /root/test.iso
 ```
